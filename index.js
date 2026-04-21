@@ -1,10 +1,14 @@
 
 var gamePattern = [];
+var userClickedPattern = [];
 
 var buttonColours = ["red", "blue", "green", "yellow"];
 
-
-
+$(".btn").click(function() {
+   var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+  playSound(userChosenColour);
+});
 function nextSequence() {
     var randomNumber = Math.floor(Math.random() * 4);
 
@@ -13,13 +17,25 @@ function nextSequence() {
     gamePattern.push(randomChosenColour);
       
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+    playSound(randomChosenColour);
+ //3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
 
-  //3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
-  var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
-  audio.play();
 }
 
+function playSound(name){
+    var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+  audio.play();
 
+}
 
+function animatePress(currentColour){
+  $("#" + currentColor).addClass("pressed");
+
+  //3. use Google/Stackoverflow to figure out how you can use Javascript to remove the pressed class after a 100 milliseconds.
+  setTimeout(function () {
+    $("#" + currentColor).removeClass("pressed");
+  }, 100);
+
+}
 
 
